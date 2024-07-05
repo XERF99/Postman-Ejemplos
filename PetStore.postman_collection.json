@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "773e605a-e82b-4abf-a496-2ea59e084ac4",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29356150"
+	},
+	"item": [
+		{
+			"name": "API crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"username\": \"fracs\",\r\n  \"firstName\": \"Xavier\",\r\n  \"lastName\": \"Machado\",\r\n  \"email\": \"ejemplo@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"phone\": \"999999999\",\r\n  \"userStatus\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API consulta usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/fracs",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"fracs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API actualizar usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9223372036854756917,\r\n    \"username\": \"fracs\",\r\n    \"firstName\": \"Xavier\",\r\n    \"lastName\": \"Machado\",\r\n    \"email\": \"ejemplo@gmail.com\",\r\n    \"password\": \"000000\",\r\n    \"phone\": \"999999999\",\r\n    \"userStatus\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/fracs",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"fracs"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

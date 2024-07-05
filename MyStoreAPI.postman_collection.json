@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "dcf09c0e-a2fa-407a-9ef9-56c08e0ff2fe",
+		"name": "MyStoreAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29356150"
+	},
+	"item": [
+		{
+			"name": "API Productos por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta de API contiene campo ID\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta de API contiene campo precio\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"price\");\r",
+							"});\r",
+							"\r",
+							"/*pm.test(\"Respuesta de API contiene campo seccion\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"seccion\");\r",
+							"});*/\r",
+							"\r",
+							"\r",
+							"pm.test(\"Encabezado de respuesta contiene fecha\", function () {\r",
+							"    pm.response.to.have.header(\"Date\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Prueba que valida que el estado sea activo\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.status).to.eql(\"active\");\r",
+							"});\r",
+							"\r",
+							"// Aserciones multiples\r",
+							"\r",
+							"pm.test(\"Validacion con multiples Aserciones\", () => {\r",
+							"    //parse the response JSON and test three properties\r",
+							"    const responseJson = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseJson.name).to.eql('tv');\r",
+							"    pm.expect(responseJson.description).to.contains('Sony');\r",
+							"    pm.expect(responseJson.name).to.be.a('string');\r",
+							"    pm.expect(responseJson.name).to.have.lengthOf(2);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL-GLOBAL}}/catalog/product/1535727",
+					"host": [
+						"{{URL-GLOBAL}}"
+					],
+					"path": [
+						"catalog",
+						"product",
+						"1535727"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Productos por categoria",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"/*pm.globals.set(\"CATEGORIA1\", \"Hola\");\r",
+							"\r",
+							"pm.collectionVariables.set(\"CATEGORIA2\", \"Hola2\");\r",
+							"\r",
+							"pm.environment.set(\"CATOGORIA3\", \"Hola3\");\r",
+							"\r",
+							"// leer variables definidas \r",
+							"\r",
+							"console.log(pm.globals.get(\"URL-GLOBAL\"));\r",
+							"console.log(pm.environment.get(\"ID-PRODUCTO\"))*/\r",
+							"\r",
+							"\r",
+							"pm.test(\"Validacion respuesta de un vector\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData.products[0].category)\r",
+							"    pm.expect(jsonData.products[2].name).to.eql(\"playStation4\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/catalog/category/Software/products?limit=20&skip=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"catalog",
+						"category",
+						"Software",
+						"products"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "skip",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API crear productos en la tienda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"tv\",\r\n  \"price\": 850,\r\n  \"manufacturer\": \"Sony\",\r\n  \"category\": \"Appliances\",\r\n  \"description\": \"Sony 8k 50 pulgadas\",\r\n  \"tags\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/catalog/product",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"catalog",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "API Borrar producto de la tienda",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/catalog/product/882464",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"catalog",
+						"product",
+						"882464"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traer todos los productos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Prueba que valida que la respuesta es exitosa (200)\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Respuesta de la API es menor de 900 ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(900);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/catalog/categories",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"catalog",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CATEGORIA2",
+			"value": ""
+		}
+	]
+}
